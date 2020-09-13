@@ -16,7 +16,9 @@ import { PublicModule } from './@public/pages/public.module';
     PublicModule,
     AppRoutingModule
   ],
+  exports: [],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
