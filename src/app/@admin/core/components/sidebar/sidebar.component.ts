@@ -7,6 +7,7 @@ import { faIdCard} from '@fortawesome/free-solid-svg-icons';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
+
 export class SidebarComponent implements OnInit {
   faColumns = faColumns;
   faIdCard = faIdCard;
