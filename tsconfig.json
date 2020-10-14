@@ -4,7 +4,8 @@
     "baseUrl": "./",
     "paths": {
       "@shop-core/*":["src/app/@public/core/*"],
-      "@shop/*":["src/app/@public"]
+      "@shop/*":["src/app/@public"],
+      "@graphql/*":["src/app/@graphql"]      
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
