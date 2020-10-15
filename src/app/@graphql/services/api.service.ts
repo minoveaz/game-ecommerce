@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { LOGIN_QUERY } from '../operations/query/user';
-import { map} from 'rxjs/operators';
+import { LOGIN_QUERY, ME_DATA_QUERY, USER_LIST_QUERY } from '../operations/query/user';
+import { map } from 'rxjs/internal/operators/map';
+import { DocumentNode } from 'graphql';
 
 @Injectable({
   providedIn: 'root'
@@ -9,21 +10,17 @@ import { map} from 'rxjs/operators';
 export class ApiService {
 
   constructor(private apollo: Apollo) { }
-
-  // añadir los metos para consumir la info de la API //
-  login(email: string, password: string){
+  protected get(query: DocumentNode, variables: object = {}, context: object = {}){
     return this.apollo.watchQuery({
-      query: LOGIN_QUERY,
-      variables: {
-        email,
-        password
-      }
+      query,
+      variables,
+      context,
+      fetchPolicy: 'network-only'
     }).valueChanges.pipe(map ((result) => {
       return result.data;
     }));
   }
-  getUsers(){}
-  getMe(){}
+
   register(){}
 }
 
