@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from '../../@graphql/services/api.service';
-import { LOGIN_QUERY, ME_DATA_QUERY } from '../../@graphql/operations/query/user';
+import { ApiService } from '@graphql/services/api.service';
+import { LOGIN_QUERY, ME_DATA_QUERY } from '@graphql/operations/query/user';
 import { Apollo } from 'apollo-angular';
 import { map } from 'rxjs/internal/operators/map';
 import { HttpHeaders } from '@angular/common/http';
+import { IMeData, ISession } from '@core/interfaces/session.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,19 @@ export class AuthService extends ApiService{
 
   constructor( apollo: Apollo) {
     super(apollo);
+   }
+
+   start(){
+      if (this.getSession() !== null){
+        this.getMe().subscribe((result: IMeData) => {
+          if (!result.status){
+            this.resetSession();
+          }
+        });
+        console.log('Sesión Iniciada');
+        return;
+      }
+      console.log('Sesión no iniciada');
    }
     // añadir los metodos para consumir la info de la API //
     login(email: string, password: string){
@@ -24,14 +38,34 @@ export class AuthService extends ApiService{
 
     getMe(){
       return this.get(ME_DATA_QUERY, {
-        include: true
+        include: false
       },
       {
         headers: new HttpHeaders ({
-          Autorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjVmNzM3ZjE2MTQ3YTY2MTgwYzhjYmEwYiIsIm5hbWUiOiJTYXJhIiwibGFzdE5hbWUiOiJWZWdhIERpYXoiLCJlbWFpbCI6InNhcmFAaG90bWFpbC5jb20iLCJyb2xlIjoiQ0xJRU5UIiwiaWQiOjF9LCJpYXQiOjE2MDI3NjQwNDQsImV4cCI6MTYwMjg1MDQ0NH0.cQ1Vie_fO3nKcOmnMSqrc7VkIiLBifhFRwT89dO6PBk'
+          authorization: (this.getSession() as ISession).token
         })
       }).pipe(map((result: any) => {
         return result.me;
       }));
+    }
+
+    setSession( token: string, expiresTimeInHours = 24 ){
+      const date = new Date();
+      date.setHours(date.getHours() + expiresTimeInHours);
+
+      const session: ISession = {
+        expiresIn : new Date(date).toISOString(),
+        token
+      };
+      console.log(session);
+      localStorage.setItem('session', JSON.stringify(session));
+    }
+
+    getSession(){
+      return JSON.parse(localStorage.getItem('session'));
+    }
+
+    resetSession(){
+      localStorage.removeItem('session');
     }
 }
