@@ -7,6 +7,6 @@ export interface ISession {
 
 export interface IMeData {
     status: boolean;
-    message: string;
-    user: IUser;
+    message?: string;
+    user?: IUser;
 }

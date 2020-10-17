@@ -5,14 +5,21 @@ import { Apollo } from 'apollo-angular';
 import { map } from 'rxjs/internal/operators/map';
 import { HttpHeaders } from '@angular/common/http';
 import { IMeData, ISession } from '@core/interfaces/session.interface';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService extends ApiService{
 
+  accessVar = new Subject<IMeData>();
+  accessVar$ = this.accessVar.asObservable();
   constructor( apollo: Apollo) {
     super(apollo);
+   }
+
+   updateSession(newValue: IMeData){
+    this.accessVar.next(newValue);
    }
 
    start(){
@@ -20,11 +27,16 @@ export class AuthService extends ApiService{
         this.getMe().subscribe((result: IMeData) => {
           if (!result.status){
             this.resetSession();
+            return;
           }
+          this.updateSession(result);
         });
         console.log('Sesión Iniciada');
         return;
       }
+      this.updateSession({
+        status: false
+      });
       console.log('Sesión no iniciada');
    }
     // añadir los metodos para consumir la info de la API //

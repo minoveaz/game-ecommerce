@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
           if (result.token !== null){
             basicAlert(TYPE_ALERT.SUCCESS, result.message);
             this.auth.setSession(result.token);
+            this.auth.updateSession(result);
             return;
           }
           basicAlert(TYPE_ALERT.ERROR, result.message);

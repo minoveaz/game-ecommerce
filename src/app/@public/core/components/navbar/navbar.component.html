@@ -13,16 +13,16 @@
         </ul>
 
         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="access">
                 <a class="nav-link" href="" [routerLink]="['/admin']" routerLinkActive="router-link-active">Admin</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="!access">
                 <a class="nav-link" href="" [routerLink]="['/login']" routerLinkActive="router-link-active">Login</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="!access">
                 <a class="nav-link" href="" [routerLink]="['/register']" routerLinkActive="router-link-active">Registro</a>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown" *ngIf="access">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Usuario
       </a>
