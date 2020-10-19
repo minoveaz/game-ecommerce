@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '@core/services/auth.service';
 import { basicAlert } from '@shared/alerts/toasts';
 import { TYPE_ALERT } from '@shared/alerts/values.config';
@@ -9,7 +9,7 @@ import { ILoginForm, IResultLogin } from '@core/interfaces/login.interface';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   login: ILoginForm = {
     email: '',
     password: ''
@@ -17,9 +17,7 @@ export class LoginComponent implements OnInit {
 
   constructor( private auth: AuthService) { }
 
-  ngOnInit(): void {
-    this.auth.start();
-  }
+
   init(){
     console.log(this.login);
     this.auth.login(this.login.email, this.login.password).subscribe(

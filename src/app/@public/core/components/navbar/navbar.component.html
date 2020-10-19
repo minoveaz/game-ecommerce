@@ -13,7 +13,7 @@
         </ul>
 
         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-            <li class="nav-item" *ngIf="access">
+            <li class="nav-item" *ngIf="access && role == 'ADMIN' ">
                 <a class="nav-link" href="" [routerLink]="['/admin']" routerLinkActive="router-link-active">Admin</a>
             </li>
             <li class="nav-item" *ngIf="!access">
@@ -24,13 +24,13 @@
             </li>
             <li class="nav-item dropdown" *ngIf="access">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Usuario
+        {{userLabel}}
       </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="#">Perfil</a>
                     <a class="dropdown-item" href="#">Configuración</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Cerrar Sesión</a>
+                    <a class="dropdown-item" (click)="logout()">Cerrar Sesión</a>
                 </div>
             </li>
         </ul>

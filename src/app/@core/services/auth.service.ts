@@ -41,7 +41,7 @@ export class AuthService extends ApiService{
    }
     // añadir los metodos para consumir la info de la API //
     login(email: string, password: string){
-      return this.get(LOGIN_QUERY, {email, password}).pipe(
+      return this.get(LOGIN_QUERY, {email, password, include: false}).pipe(
         map((result: any) => {
           return result.login;
         })
@@ -79,5 +79,6 @@ export class AuthService extends ApiService{
 
     resetSession(){
       localStorage.removeItem('session');
+      this.updateSession({status: false});
     }
 }

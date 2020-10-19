@@ -10,5 +10,6 @@ export const USER_FRANGMENT = gql`
     birthday @include(if: $include)
     password @include(if: $include)
     email
+    role
     }
 `;
