@@ -30,6 +30,7 @@
     "apollo-link-error": "^1.1.13",
     "graphql": "^15.3.0",
     "graphql-tag": "^2.10.3",
+    "jwt-decode": "^3.0.0",
     "rxjs": "~6.5.4",
     "sweetalert2": "^10.6.1",
     "tslib": "^1.10.0",
