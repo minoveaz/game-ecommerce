@@ -16,7 +16,7 @@ import { GraphqlModule } from './@graphql/modules/graphql.module';
     AdminModule,
     PublicModule,
     AppRoutingModule,
-    GraphqlModule
+    GraphqlModule,
   ],
   exports: [],
   providers: [],

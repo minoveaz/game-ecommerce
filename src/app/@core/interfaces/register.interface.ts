@@ -1,13 +1,16 @@
 import { IUser } from './user.interface';
 
-export interface ILoginForm{
+export interface IRegisterForm {
+    name: string;
+    lastName: string;
     email: string;
     password: string;
+    birthday: string;
 }
 
-export interface IResultLogin {
+export interface IResultRegister {
     status: boolean;
     message: string;
-    token?: string;
     user?: IUser;
 }
+

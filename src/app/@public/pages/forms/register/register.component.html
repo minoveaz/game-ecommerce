@@ -1,1 +1,79 @@
-<p>register works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-lg"></div>
+        <div class="col-lg-6">
+            <form (ngSubmit)="add()" #forma="ngForm">
+                <h1>Registro de usuario</h1>
+                <p>
+                    Rellena los datos del formulario para efectuar el registro de tu cuenta de usuario.
+                </p>
+                <hr />
+                <label for="name"><b>Nombre</b></label>
+                <input type="text" placeholder="Introduzca su Nombre" name="name" required #name="ngModel" [(ngModel)]="register.name" class="form-control" [ngClass]="{
+            'is-valid': name.valid,
+            'is-invalid': name.invalid
+          }" />
+                <div class="alert alert-danger" *ngIf="name.invalid && (name.dirty || name.touched)">
+                    <div *ngIf="name.errors.required">
+                        Introduzca su Nombre/s
+                    </div>
+                </div>
+                <label for="name"><b>Apellido</b></label>
+                <input type="text" placeholder="Introduzca su Apellido" name="lastname" required #lastname="ngModel" [(ngModel)]="register.lastName" class="form-control" [ngClass]="{
+            'is-valid': lastname.valid,
+            'is-invalid': lastname.invalid
+          }" />
+                <div class="alert alert-danger" *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)">
+                    <div *ngIf="lastname.errors.required">
+                        Introduzca un Apellido/s
+                    </div>
+                </div>
+
+                <label for="name"><b>Fecha de nacimiento</b></label>
+                <app-date-picker-legal-age (newDate)="dataAsign($event)"></app-date-picker-legal-age>
+                <label for="email"><b>Email</b></label>
+                <input type="text" placeholder="Introduzca un Email valido" name="email" required #email="ngModel" [(ngModel)]="register.email" class="form-control" [ngClass]="{
+            'is-valid': !email.invalid,
+            'is-invalid': email.invalid
+          }" pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$" />
+                <div class="alert alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+                    <div *ngIf="email.errors.required">
+                        Introduzca un correo electronico valido
+                    </div>
+                    <div *ngIf="email.errors && email.errors.pattern">
+                        El Correo electronico no sigue el formato correcto. Sigue este ejemplo: example@example.com
+                    </div>
+                </div>
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Indique una contraseña" name="password" required #password="ngModel" [(ngModel)]="register.password" class="form-control" [ngClass]="{
+            'is-valid': password.valid,
+            'is-invalid': password.invalid
+          }" />
+                <div class="alert alert-danger" *ngIf="password.invalid && (password.dirty || password.touched)">
+                    <div *ngIf="password.errors.required">
+                        Introduzca una contraseña por favor
+                    </div>
+                </div>
+
+                <p>
+                    Creando una cuenta aceptas nuestros terminos y condiciones
+                    <a href="#" style="color: dodgerblue">Terminos y Condiciones</a>.
+                </p>
+                <p>
+                    ¿Ya tiene una cuenta?
+                    <a [routerLink]="['/login']" style="color: dodgerblue">Iniciar sesión</a
+          >.
+        </p>
+        <div class="row">
+          <div class="col-lg">
+            <button [disabled]="forma.invalid" type="submit" class="signup-btn">
+              Registrarse
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="col-lg"></div>
+  </div>
+</div>

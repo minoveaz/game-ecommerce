@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { LOGIN_QUERY, ME_DATA_QUERY, USER_LIST_QUERY } from '../operations/query/user';
 import { map } from 'rxjs/internal/operators/map';
 import { DocumentNode } from 'graphql';
+import { IRegisterForm } from '@core/interfaces/register.interface';
+import { REGISTER_USER } from '../operations/mutation/user';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,16 @@ export class ApiService {
     }));
   }
 
-  register(){}
+  protected set(mutation: DocumentNode, variables: object = {}, context: object = {}){
+    return this.apollo.mutate({
+      mutation,
+      variables,
+      context
+    }).pipe(
+      map((result) => {
+        return result.data;
+      })
+    );
+  }
 }
 
