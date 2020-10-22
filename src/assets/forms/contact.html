@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<head>
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+    crossorigin="anonymous"
+  />
+  <link rel="stylesheet" type="text/css" href="forms.scss" />
+</head>
+<body>
+  <br />
+  <div class="container">
+    <div class="row">
+      <div class="col-lg"></div>
+      <div class="col-lg-6">
+        <form>
+          <h1>Contacta con nosotros</h1>
+          <p>
+            Escríbenos para consultar sobre nuestros productos, dudas, problemas
+            sobre los envios,...
+          </p>
+          <hr />
+          <label for="fname">Nombre</label>
+          <input
+            type="text"
+            id="fname"
+            name="firstname"
+            placeholder="Tu nombre..."
+          />
+
+          <label for="lname">Apellidos</label>
+          <input
+            type="text"
+            id="lname"
+            name="lastname"
+            placeholder="Apellidos..."
+          />
+
+          <label for="subject">Comentario</label>
+          <textarea
+            id="subject"
+            name="subject"
+            placeholder="Escribe acerca de lo que quieres preguntar, comentar.."
+            style="height: 200px;"
+          ></textarea>
+
+          <input class="signup-btn" type="submit" value="Contactar" />
+        </form>
+      </div>
+      <div class="col-lg"></div>
+    </div>
+  </div>
+</body>
